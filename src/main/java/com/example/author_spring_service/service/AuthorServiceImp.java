@@ -1,15 +1,12 @@
 package com.example.author_spring_service.service;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMappingException;
-import com.amazonaws.services.dynamodbv2.datamodeling.ScanResultPage;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.example.author_spring_service.common.ErrorMessages;
 import com.example.author_spring_service.entity.Author;
 import com.example.author_spring_service.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class AuthorServiceImp implements AuthorService {
@@ -44,9 +41,11 @@ public class AuthorServiceImp implements AuthorService {
         this.authorRepository.remove(author);
         return author;
     }
-
-    @Override
-    public ScanResultPage<Author> getData(int limit, int offset, Map<String, String> filters) {
-        return this.authorRepository.getList(limit, offset, filters);
-    }
 }
+
+
+
+//    @Override
+//    public QueryResultPage<Author> getData(int limit, int offset, Map<String, String> filters) {
+//        return this.authorRepository.getList(limit, offset, filters);
+//    }

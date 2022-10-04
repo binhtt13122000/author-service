@@ -1,7 +1,7 @@
 package com.example.author_spring_service.controller;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMappingException;
-import com.amazonaws.services.dynamodbv2.datamodeling.ScanResultPage;
+import com.amazonaws.services.dynamodbv2.datamodeling.QueryResultPage;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.example.author_spring_service.common.Common;
 import com.example.author_spring_service.common.ErrorAPI;
@@ -15,32 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 public class AuthorController {
     @Autowired
     private AuthorService authorService;
-
-    @GetMapping()
-    public ResponseEntity getList(
-            @RequestParam(name = Common.FIRST_NAME_PARAM) Optional<String> firstName,
-            @RequestParam(name = Common.LAST_NAME_PARAM) Optional<String> lastName,
-            @RequestParam(name = Common.EMAIL_PARAM) Optional<String> email,
-            @RequestParam Optional<Integer> offset,
-            @RequestParam Optional<Integer> limit
-    ) {
-        Map<String, String> filters = new HashMap<>();
-        filters.put(Common.FIRST_NAME_FIELD, firstName.orElse(Common.DEFAULT_STRING));
-        filters.put(Common.LAST_NAME_FIELD, lastName.orElse(Common.DEFAULT_STRING));
-        filters.put(Common.EMAIL_FIELD, email.orElse(Common.DEFAULT_STRING));
-        ScanResultPage<Author> authorScanResultPage = this.authorService.getData(
-                limit.orElse(Common.DEFAULT_LIMIT),
-                offset.orElse(Common.DEFAULT_OFFSET), filters);
-        return new ResponseEntity(authorScanResultPage, HttpStatus.OK);
-    }
 
     @PostMapping()
     public ResponseEntity post(@Valid @RequestBody CreateAuthorDTO body) {
@@ -94,3 +73,24 @@ public class AuthorController {
         return new ResponseEntity(new ErrorAPI(status, message), status);
     }
 }
+
+
+
+
+//    @GetMapping()
+//    public ResponseEntity getList(
+//            @RequestParam(name = Common.FIRST_NAME_PARAM) Optional<String> firstName,
+//            @RequestParam(name = Common.LAST_NAME_PARAM) Optional<String> lastName,
+//            @RequestParam(name = Common.EMAIL_PARAM) Optional<String> email,
+//            @RequestParam Optional<Integer> offset,
+//            @RequestParam Optional<Integer> limit
+//    ) {
+//        Map<String, String> filters = new HashMap<>();
+//        filters.put(Common.FIRST_NAME_FIELD, firstName.orElse(Common.DEFAULT_STRING));
+//        filters.put(Common.LAST_NAME_FIELD, lastName.orElse(Common.DEFAULT_STRING));
+//        filters.put(Common.EMAIL_FIELD, email.orElse(Common.DEFAULT_STRING));
+//        QueryResultPage<Author> authorScanResultPage = this.authorService.getData(
+//                limit.orElse(Common.DEFAULT_LIMIT),
+//                offset.orElse(Common.DEFAULT_OFFSET), filters);
+//        return new ResponseEntity(authorScanResultPage, HttpStatus.OK);
+//    }

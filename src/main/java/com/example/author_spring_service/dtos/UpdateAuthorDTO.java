@@ -1,7 +1,6 @@
 package com.example.author_spring_service.dtos;
 
 import com.example.author_spring_service.common.ErrorMessages;
-import com.example.author_spring_service.entity.Author;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

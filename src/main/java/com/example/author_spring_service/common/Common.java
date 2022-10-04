@@ -1,8 +1,6 @@
 package com.example.author_spring_service.common;
 
 public class Common {
-    public static final String PATH_BASE = "";
-    public static final String PATH_GET_ONE = "/{id}";
     public static final String DATE_TIME_FORMAT = "dd-MM-yyyy hh:mm:ss";
     public static final String AUTHOR_TABLE = "Author";
     public static final String DEFAULT_STRING = "";
@@ -19,4 +17,5 @@ public class Common {
     public static final String SCAN_FILTER_VARIABLE = "#%s";
     public static final String SCAN_FILTER_DATA = ":%s";
     public static final String SCAN_ATTRIBUTE_FORMAT = "(contains (%s, %s))";
+    public static final String PATH_GET_ONE = "/{id}";
 }
